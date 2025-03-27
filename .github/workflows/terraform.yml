@@ -36,9 +36,8 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan -var="project_id=${{ secrets.SCALEWAY_PROJECT_ID }}"
+        run: terraform plan -var="project_id=${{ secrets.SCALEWAY_PROJECT_ID }}
 
-      # Uncomment below to enable apply on push to main
-      # - name: Terraform Apply
-      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      #   run: terraform apply -auto-approve
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve
