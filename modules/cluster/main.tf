@@ -8,7 +8,7 @@ terraform {
 }
 
 resource "scaleway_k8s_cluster" "kapsule_multi_az" {
-  name               = "kapsule-multi-az"
+  name = var.cluster_name
   tags               = ["multi-az"]
   version            = "1.30"
   cni                = "cilium"
