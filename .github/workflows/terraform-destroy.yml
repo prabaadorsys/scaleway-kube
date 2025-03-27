@@ -1,0 +1,31 @@
+name: Terraform Destroy
+
+on:
+  workflow_dispatch:  # Manual trigger from GitHub UI
+
+jobs:
+  destroy:
+    name: Terraform Destroy
+    runs-on: ubuntu-latest
+
+    env:
+      SCW_ACCESS_KEY: ${{ secrets.SCALEWAY_ACCESS_KEY }}
+      SCW_SECRET_KEY: ${{ secrets.SCALEWAY_SECRET_KEY }}
+      SCW_PROJECT_ID: ${{ secrets.SCALEWAY_PROJECT_ID }}
+      SCW_DEFAULT_REGION: ${{ secrets.SCALEWAY_REGION }}
+      TF_VAR_project_id: ${{ secrets.SCALEWAY_PROJECT_ID }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.6.6
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
