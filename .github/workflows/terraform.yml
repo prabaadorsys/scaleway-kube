@@ -36,7 +36,7 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -var="project_id=${{ secrets.SCALEWAY_PROJECT_ID }}"
 
       # Uncomment below to enable apply on push to main
       # - name: Terraform Apply
