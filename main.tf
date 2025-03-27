@@ -26,4 +26,5 @@ module "cluster" {
   project_id         = var.project_id
   region             = var.region
   private_network_id = module.network.private_network_id
+  cluster_name       = var.cluster_name 
 }
